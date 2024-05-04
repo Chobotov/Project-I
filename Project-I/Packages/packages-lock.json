@@ -161,7 +161,7 @@
       "url": "https://packages.unity.com"
     },
     "jp.hadashikick.vcontainer": {
-      "version": "1.14.0",
+      "version": "1.15.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {},

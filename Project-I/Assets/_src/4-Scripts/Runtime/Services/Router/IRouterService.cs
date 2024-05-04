@@ -2,6 +2,6 @@
 {
     public interface IRouterService
     {
-        void Notify();
+        void Show();
     }
 }

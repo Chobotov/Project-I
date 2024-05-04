@@ -11,9 +11,8 @@ namespace PorjectI.Services
             this.uiController = uiController;
         }
 
-        public void Notify()
+        public void Show()
         {
-            uiController.Notify();
         }
     }
 }

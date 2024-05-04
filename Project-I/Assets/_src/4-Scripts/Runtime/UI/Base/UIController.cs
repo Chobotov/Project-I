@@ -8,10 +8,5 @@ namespace PorjectI.UI
         {
             DontDestroyOnLoad(gameObject);
         }
-
-        public void Notify()
-        {
-            Debug.Log($"UI Controller");
-        }
     }
 }

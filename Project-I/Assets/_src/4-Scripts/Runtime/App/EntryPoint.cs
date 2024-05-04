@@ -14,12 +14,14 @@ namespace PorjectI.App
             gameScope.Build();
 
             Debug.Log($"System : End Init");
+
+            DontDestroyOnLoad(gameObject);
         }
 
         private void Start()
         {
             Debug.Log($"Scene Manager : Load Game Scene");
-            
+
             SceneManager.LoadScene("Game");
         }
     }
