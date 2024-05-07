@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PorjectI.UI
+namespace ProjectI.UI
 {
     public class UIController : MonoBehaviour
     {

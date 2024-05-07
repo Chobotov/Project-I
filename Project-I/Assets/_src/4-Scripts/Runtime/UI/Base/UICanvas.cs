@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace PorjectI.UI
+namespace ProjectI.UI
 {
-    public class UICanvas : MonoBehaviour
+    public abstract class UICanvas : MonoBehaviour
     {
     }
 }

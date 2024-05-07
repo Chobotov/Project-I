@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace PorjectI.App
+namespace ProjectI.App
 {
     public class EntryPoint : MonoBehaviour
     {

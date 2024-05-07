@@ -1,4 +1,4 @@
-﻿namespace PorjectI.Services
+﻿namespace ProjectI.Services
 {
     public interface IRouterService
     {

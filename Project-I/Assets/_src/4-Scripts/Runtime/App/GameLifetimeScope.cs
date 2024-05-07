@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
-using PorjectI.Services;
-using PorjectI.UI;
+using ProjectI.Game.Levels;
+using ProjectI.UI;
+using ProjectI.Services;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace PorjectI.App
+namespace ProjectI.App
 {
     public class GameLifetimeScope : LifetimeScope
     {
@@ -48,6 +49,8 @@ namespace PorjectI.App
                 builder.RegisterInstance(controller).AsSelf();
             }
 
+            builder.RegisterEntryPoint<LevelRoot>();
+
             Debug.Log($"System : End Register Controllers");
         }
 
@@ -56,7 +59,10 @@ namespace PorjectI.App
             Debug.Log($"System : Start Register Services");
 
             Debug.Log($"System : Register {nameof(RouterService)}");
-            builder.Register<RouterService>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<IRouterService, RouterService>(Lifetime.Singleton);
+
+            Debug.Log($"System : Register {nameof(LevelService)}");
+            builder.Register<ILevelService, LevelService>(Lifetime.Singleton);
 
             Debug.Log($"System : End Register Services");
         }

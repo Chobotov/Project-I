@@ -1,6 +1,6 @@
-﻿using PorjectI.UI;
+﻿using ProjectI.UI;
 
-namespace PorjectI.Services
+namespace ProjectI.Services
 {
     public class RouterService : IRouterService
     {
