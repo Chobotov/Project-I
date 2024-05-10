@@ -3,5 +3,7 @@
     public interface ILevelService
     {
         int CurrentLevel { get; }
+
+        LevelController GetLevelField();
     }
 }

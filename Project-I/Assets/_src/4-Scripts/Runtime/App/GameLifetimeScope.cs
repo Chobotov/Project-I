@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using ProjectI.Game.Levels;
-using ProjectI.UI;
 using ProjectI.Services;
 using UnityEngine;
 using VContainer;
@@ -49,7 +48,7 @@ namespace ProjectI.App
                 builder.RegisterInstance(controller).AsSelf();
             }
 
-            builder.RegisterEntryPoint<LevelRoot>();
+            builder.RegisterEntryPoint<LevelFactory>();
 
             Debug.Log($"System : End Register Controllers");
         }
