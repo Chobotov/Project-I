@@ -1,52 +1,73 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ProjectI.Game.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [Header("Move settings")]
         [SerializeField] private float speed;
         [SerializeField] private float jumpForce;
+        [SerializeField] private float groundHeight; 
+        [Header("Stats")] 
+        [SerializeField] private bool isGround;
+
+        private Controls.Controls controls;
 
         private Rigidbody rigidbody;
 
-        private Controls.Controls inputControls;
-
+        private IMoveble moveble;
+        
         private float moveInput;
 
         private void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
 
-            inputControls = new Controls.Controls();
+            moveble = new MarioMoveBehaviour();
+            controls = new Controls.Controls();
         }
 
         private void OnEnable()
         {
-            inputControls.Enable();
+            controls.Main.Jump.performed += Jump;
 
-            inputControls.Main.Jump.performed += context => Jump();
+            controls.Enable();
         }
 
         private void OnDisable()
         {
-            inputControls.Disable();
+            controls.Main.Jump.performed -= Jump;
+
+            controls.Disable();
         }
 
-        private void FixedUpdate()
+        private void HandleGravity()
         {
-            Move();
-        }
-
-        private void Move()
-        {
-            moveInput = inputControls.Main.Move.ReadValue<float>();
-
-            rigidbody.velocity = new Vector2(moveInput * speed, rigidbody.velocity.y);
+            
         }
         
-        private void Jump()
+        private void Jump(InputAction.CallbackContext obj)
         {
-            rigidbody.velocity = Vector2.up * jumpForce;
+            if (isGround)
+            {
+                moveble.Jump(jumpForce);
+            }
+        }
+
+        private void CheckGround()
+        {
+            isGround = Physics.Raycast(transform.position, Vector3.down, groundHeight);
+        }
+        
+        private void FixedUpdate()
+        {
+            CheckGround();
+
+            moveInput = controls.Main.Move.ReadValue<float>();
+
+            moveble.Move(moveInput, speed);
         }
     }
 }

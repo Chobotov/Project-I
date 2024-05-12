@@ -75,7 +75,6 @@ namespace YG
 
         private void Awake()
         {
-            transform.SetParent(null);
             gameObject.name = "YandexGame";
 
             if (singleton)
