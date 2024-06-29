@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4892541751475006931}
   - component: {fileID: 343973331117181763}
   - component: {fileID: 8691013263330071985}
+  - component: {fileID: 5897145352650663662}
   m_Layer: 0
   m_Name: PlayerController Test
   m_TagString: Untagged
@@ -131,11 +132,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &8691013263330071985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,5 +149,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 717a16e045a845579f96df5acdf21602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 10
+  defaultMoveSpeed: 5
+  fallMoveSpeed: 5
+  defaultJumpCount: 1
+  jumpForce: 5
+  groundHeight: 1
+  gravityComponent: {fileID: 5897145352650663662}
+  isGround: 1
+--- !u!114 &5897145352650663662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052531585332974219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3e43cf2fca498ba2cfc64d9afe61b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 0.5
+  gravity: 45

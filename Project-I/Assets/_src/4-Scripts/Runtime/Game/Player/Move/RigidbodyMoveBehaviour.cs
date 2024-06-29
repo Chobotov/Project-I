@@ -18,7 +18,7 @@ namespace ProjectI.Game.Player
 
         public void Jump(float jumpForce)
         {
-            rigidbody.velocity = Vector2.up * jumpForce;
+            rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 }

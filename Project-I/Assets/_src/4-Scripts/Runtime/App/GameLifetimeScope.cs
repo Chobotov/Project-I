@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ProjectI.Game.Audio;
 using ProjectI.Game.Levels;
 using ProjectI.Services;
 using UnityEngine;
@@ -59,6 +60,9 @@ namespace ProjectI.App
 
             Debug.Log($"System : Register {nameof(RouterService)}");
             builder.Register<IRouterService, RouterService>(Lifetime.Singleton);
+
+            Debug.Log($"System : Register {nameof(AudioService)}");
+            builder.Register<IAudioService, AudioService>(Lifetime.Singleton);
 
             Debug.Log($"System : Register {nameof(LevelService)}");
             builder.Register<ILevelService, LevelService>(Lifetime.Singleton);

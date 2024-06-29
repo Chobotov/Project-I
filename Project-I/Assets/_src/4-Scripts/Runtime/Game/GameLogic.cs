@@ -1,7 +1,9 @@
 ﻿using Cinemachine;
+using ProjectI.Game.Audio;
 using ProjectI.Game.Levels;
 using ProjectI.Game.Player;
 using UnityEngine;
+using VContainer;
 
 namespace ProjectI.Game
 {
@@ -11,6 +13,16 @@ namespace ProjectI.Game
         [Header("Factories")]
         [SerializeField] private LevelFactory levelFactory;
         [SerializeField] private PlayerFactory playerFactory;
+
+        private IAudioService audioService;
+
+        [Inject]
+        public void Inject(IAudioService service)
+        {
+            audioService = service;
+
+            audioService.PlayMusic(AudioKeys.MusicTestLevel);
+        }
 
         private void Start()
         {
