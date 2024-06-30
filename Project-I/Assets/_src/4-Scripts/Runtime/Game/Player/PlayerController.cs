@@ -7,57 +7,67 @@ namespace ProjectI.Game.Player
 {
     public class PlayerController : MonoBehaviour
     {
-        [Header("Move settings")]
-        [SerializeField] private float defaultMoveSpeed;
-        [SerializeField] private float fallMoveSpeed;
-        [SerializeField] private float defaultJumpCount;
-        [SerializeField] private float jumpForce;
-        [SerializeField] private float groundHeight;
-        [Header("Stats")]
+        private static int JumpAnimationKey = Animator.StringToHash("Jump");
+
+        [Header("Components")] 
+        [SerializeField] private Animator animator;
         [SerializeField] private CustomGravityComponent gravityComponent;
+        [Space]
         [SerializeField] private bool isGround;
 
+        private PlayerConfig config;
         private Controls.Controls controls;
 
         private Rigidbody rigidbody;
 
         private IAudioService audioService;
         private IMoveble moveble;
+        private AttackComponent attackComponent;
 
         private float speed;
         private float moveInput;
         private int jumpCount;
 
-        private bool CanJump => isGround || jumpCount < defaultJumpCount;
+        private MoveSettings MoveSettings => config.MoveSettings;
+        private bool CanJump => isGround || jumpCount < MoveSettings.DefaultJumpCount;
 
         [Inject]
-        public void Inject(IAudioService audioService)
+        public void Inject(IAudioService audioService, PlayerConfig config)
         {
             this.audioService = audioService;
+            this.config = config;
+
+            speed = MoveSettings.DefaultMoveSpeed;
         }
-        
+
         private void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
 
             moveble = new RigidbodyMoveBehaviour(rigidbody);
+            attackComponent = new RotateAttack(animator);
             controls = new Controls.Controls();
-
-            speed = defaultMoveSpeed;
         }
 
         private void OnEnable()
         {
             controls.Main.Jump.performed += Jump;
+            controls.Main.Attack.performed += Attack;
 
             controls.Enable();
         }
 
         private void OnDisable()
         {
+            controls.Main.Attack.performed -= Attack;
             controls.Main.Jump.performed -= Jump;
 
             controls.Disable();
+        }
+
+        private void Attack(InputAction.CallbackContext obj)
+        {
+            attackComponent.Execute();
         }
 
         private void Jump(InputAction.CallbackContext obj)
@@ -65,18 +75,19 @@ namespace ProjectI.Game.Player
             if (CanJump)
             {
                 var gravityValue = -gravityComponent.Gravity * gravityComponent.GravityScale;
-                var force = Mathf.Sqrt(jumpForce * (gravityValue) * -2) * rigidbody.mass;
+                var force = Mathf.Sqrt(MoveSettings.JumpForce * (gravityValue) * -2) * rigidbody.mass;
+
+                animator.SetTrigger(JumpAnimationKey);
+                audioService.PlaySfx(AudioKeys.SfxPlayerJump);
                 moveble.Jump(force);
 
                 jumpCount++;
-                
-                audioService.PlaySfx(AudioKeys.SfxPlayerJump);
             }
         }
 
         private void CheckGround()
         {
-            isGround = Physics.Raycast(transform.position, Vector3.down, groundHeight);
+            isGround = Physics.Raycast(transform.position, Vector3.down, MoveSettings.GroundHeight);
         }
 
         private void FixedUpdate()
@@ -86,12 +97,12 @@ namespace ProjectI.Game.Player
 
             if (isGround)
             {
-                speed = defaultMoveSpeed;
+                speed = MoveSettings.DefaultMoveSpeed;
                 jumpCount = 0;
             }
             else
             {
-                speed = fallMoveSpeed;
+                speed = MoveSettings.FallMoveSpeed;
             }
 
             moveInput = controls.Main.Move.ReadValue<float>();
