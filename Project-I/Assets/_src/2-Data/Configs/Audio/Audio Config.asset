@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Audio Config
   m_EditorClassIdentifier: 
   clips:
-  - key: 1
+  - key: 2
     clip: {fileID: 8300000, guid: 8a4ef010e51147b40bd19056d18625bc, type: 3}
   - key: 0
     clip: {fileID: 8300000, guid: 37a2d926b695e1540b44de6135ad2f63, type: 3}
+  - key: 1
+    clip: {fileID: 8300000, guid: 9c5e406220e2fce4d9873e8be8fb4c80, type: 3}

@@ -4,6 +4,7 @@ namespace ProjectI.Game.Audio
     {
         //SFX
         SfxPlayerJump,
+        SfxPlayerAttack,
         
         //Music
         MusicTestLevel

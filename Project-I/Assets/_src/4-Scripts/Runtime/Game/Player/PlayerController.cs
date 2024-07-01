@@ -67,6 +67,10 @@ namespace ProjectI.Game.Player
 
         private void Attack(InputAction.CallbackContext obj)
         {
+            if (!isGround) return;
+
+            audioService.PlaySfx(AudioKeys.SfxPlayerAttack);
+
             attackComponent.Execute();
         }
 
@@ -74,6 +78,7 @@ namespace ProjectI.Game.Player
         {
             if (CanJump)
             {
+            
                 var gravityValue = -gravityComponent.Gravity * gravityComponent.GravityScale;
                 var force = Mathf.Sqrt(MoveSettings.JumpForce * (gravityValue) * -2) * rigidbody.mass;
 
@@ -81,6 +86,8 @@ namespace ProjectI.Game.Player
                 audioService.PlaySfx(AudioKeys.SfxPlayerJump);
                 moveble.Jump(force);
 
+                Debug.Log($"Jump");
+                
                 jumpCount++;
             }
         }
