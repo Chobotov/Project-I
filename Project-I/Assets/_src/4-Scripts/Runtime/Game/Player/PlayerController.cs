@@ -78,17 +78,14 @@ namespace ProjectI.Game.Player
         {
             if (CanJump)
             {
-            
+                jumpCount++;
+
                 var gravityValue = -gravityComponent.Gravity * gravityComponent.GravityScale;
                 var force = Mathf.Sqrt(MoveSettings.JumpForce * (gravityValue) * -2) * rigidbody.mass;
 
                 animator.SetTrigger(JumpAnimationKey);
                 audioService.PlaySfx(AudioKeys.SfxPlayerJump);
                 moveble.Jump(force);
-
-                Debug.Log($"Jump");
-                
-                jumpCount++;
             }
         }
 

@@ -15,6 +15,6 @@ MonoBehaviour:
   moveSettings:
     defaultMoveSpeed: 5
     fallMoveSpeed: 5
-    defaultJumpCount: 2
+    defaultJumpCount: 1
     jumpForce: 5
     groundHeight: 2

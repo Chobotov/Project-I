@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace ProjectI.Game.Levels
 {
@@ -6,8 +7,12 @@ namespace ProjectI.Game.Levels
     {
         [SerializeField] private Transform startPoint;
         [SerializeField] private Transform endPoint;
+        [Space]
+        [SerializeField] private List<EnemySpawnPoint> enemiesPoints;
 
         public Transform StartPoint => startPoint;
         public Transform EndPoint => endPoint;
+
+        public IReadOnlyCollection<EnemySpawnPoint> EnemiesPoints => enemiesPoints;
     }
 }
