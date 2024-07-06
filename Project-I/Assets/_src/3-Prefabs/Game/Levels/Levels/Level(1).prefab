@@ -2185,12 +2185,12 @@ PrefabInstance:
     - target: {fileID: 1474829663900364161, guid: 589799e3ae830654eb22cfa7cb08ef35,
         type: 3}
       propertyPath: m_Name
-      value: EnemySpawnPoint (Speedy)
+      value: EnemySpawnPoint (Crab)
       objectReference: {fileID: 0}
     - target: {fileID: 8053794140599379097, guid: 589799e3ae830654eb22cfa7cb08ef35,
         type: 3}
       propertyPath: type
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
 using ProjectI.Game.Audio;
+using ProjectI.Game.Enemies;
 using ProjectI.Game.Levels;
 using ProjectI.Game.Player;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace ProjectI.Game
         [Header("Factories")]
         [SerializeField] private LevelFactory levelFactory;
         [SerializeField] private PlayerFactory playerFactory;
+        [SerializeField] private EnemyFactory enemyFactory;
 
         private IAudioService audioService;
 
@@ -29,7 +31,18 @@ namespace ProjectI.Game
             levelFactory.CreateLevelField();
             playerFactory.CreatePlayer(levelFactory.LevelField.StartPoint.position);
 
+            CreateEnemies();
             SetCameraFollow(playerFactory.Player.transform);
+        }
+
+        private void CreateEnemies()
+        {
+            var levelPoints = levelFactory.LevelField.EnemiesPoints;
+
+            foreach (var point in levelPoints)
+            {
+                enemyFactory.SpawnEnemy(point.Type, point.Position);
+            }
         }
 
         private void SetCameraFollow(Transform follow)

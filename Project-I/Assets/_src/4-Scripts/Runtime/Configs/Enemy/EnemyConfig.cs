@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ProjectI.Configs.Enemy
 {
-    [CreateAssetMenu(fileName = "Enemy Config", menuName = "Game/Configs/Enemy", order = 0)]
+    [CreateAssetMenu(fileName = "Enemy Config", menuName = "ProjectI/Configs/Enemy", order = 0)]
     public class EnemyConfig : ScriptableObject
     {
         [SerializeField] private EnemyAI enemyPrefab;

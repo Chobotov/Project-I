@@ -1,13 +1,15 @@
 using ProjectI.Configs.Enemy;
 using UnityEngine;
+using VContainer;
 
 namespace ProjectI.Game.Enemies
 {
-    public class EnemyFactory
+    public class EnemyFactory : MonoBehaviour
     {
-        private readonly EnemyConfig config;
+        private EnemyConfig config;
 
-        public EnemyFactory(EnemyConfig config)
+        [Inject]
+        public void Inject(EnemyConfig config)
         {
             this.config = config;
         }
@@ -16,8 +18,8 @@ namespace ProjectI.Game.Enemies
         {
             var data = config.GetData(type);
 
-            var enemy = Object.Instantiate(config.EnemyPrefab, spawnPosition, Quaternion.identity);
-            Object.Instantiate(data.View, enemy.Render);
+            var enemy = Instantiate(config.EnemyPrefab, spawnPosition, Quaternion.identity, transform);
+            Instantiate(data.View, enemy.Render);
 
             enemy.Init(data);
 

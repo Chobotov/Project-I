@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectI.Game.Enemies
 {
-    public abstract class EnemyAI : MonoBehaviour
+    public class EnemyAI : MonoBehaviour
     {
         [SerializeField] private Transform render;
         [SerializeField] private EnemyType type;
@@ -18,9 +18,15 @@ namespace ProjectI.Game.Enemies
         public EnemyType Type => type;
         public Transform Render => render;
 
+        protected virtual void Awake()
+        {
+            rigidbody = GetComponent<Rigidbody>();
+        }
+
         public virtual void Init(EnemyData data)
         {
             this.data = data;
+            this.type = data.Type;
         }
     }
 }
