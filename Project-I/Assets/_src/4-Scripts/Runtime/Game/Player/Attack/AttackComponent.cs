@@ -6,6 +6,11 @@ namespace ProjectI.Game.Player
     {
         protected static int AttackAnimationKey = Animator.StringToHash("Attack");
 
-        public abstract void Execute();
+        protected abstract void PerformAttack();
+
+        public virtual void Execute()
+        {
+            PerformAttack();
+        }
     }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5126935727371715411}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 743369737106050359}
   - component: {fileID: 7384881467762064700}
   - component: {fileID: 9212535159953102803}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 6033995159711611456}
   - component: {fileID: 31246094274370808}
   - component: {fileID: 478610729052924930}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 343973331117181763}
   - component: {fileID: 8691013263330071985}
   - component: {fileID: 5897145352650663662}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerController Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,6 +344,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 6219390680579424005}
   gravityComponent: {fileID: 5897145352650663662}
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   isGround: 1
 --- !u!114 &5897145352650663662
 MonoBehaviour:
@@ -371,7 +374,7 @@ GameObject:
   - component: {fileID: 143474830582824543}
   - component: {fileID: 3390616295326441172}
   - component: {fileID: 20287838218956350}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -5,7 +5,7 @@ using VContainer;
 
 namespace ProjectI.Game.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IDamageble
     {
         private static int JumpAnimationKey = Animator.StringToHash("Jump");
 
@@ -13,6 +13,7 @@ namespace ProjectI.Game.Player
         [SerializeField] private Animator animator;
         [SerializeField] private CustomGravityComponent gravityComponent;
         [Space]
+        [SerializeField] private LayerMask groundLayerMask;
         [SerializeField] private bool isGround;
 
         private PlayerConfig config;
@@ -45,7 +46,7 @@ namespace ProjectI.Game.Player
             rigidbody = GetComponent<Rigidbody>();
 
             moveble = new RigidbodyMoveBehaviour(rigidbody);
-            attackComponent = new RotateAttack(animator);
+            attackComponent = new RotateAttack(transform, animator);
             controls = new Controls.Controls();
         }
 
@@ -91,7 +92,7 @@ namespace ProjectI.Game.Player
 
         private void CheckGround()
         {
-            isGround = Physics.Raycast(transform.position, Vector3.down, MoveSettings.GroundHeight);
+            isGround = Physics.Raycast(transform.position, Vector3.down, MoveSettings.GroundHeight, groundLayerMask);
         }
 
         private void FixedUpdate()
@@ -111,6 +112,18 @@ namespace ProjectI.Game.Player
 
             moveInput = controls.Main.Move.ReadValue<float>();
             moveble.Move(moveInput, speed);
+        }
+
+        private int health;
+        public int Health => health;
+        public void SetDamage(int damage)
+        {
+            health = health -= damage;
+
+            if (health <= 0)
+            {
+                health = 0;
+            }
         }
     }
 }
