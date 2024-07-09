@@ -4,11 +4,11 @@ namespace ProjectI.Services
 {
     public class RouterService : IRouterService
     {
-        private readonly UIController uiController;
+        private readonly RouterController routerController;
 
-        public RouterService(UIController uiController)
+        public RouterService(RouterController routerController)
         {
-            this.uiController = uiController;
+            this.routerController = routerController;
         }
 
         public void Show()

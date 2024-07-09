@@ -26,5 +26,10 @@ namespace ProjectI.Game.Player
 
             resolver.InjectGameObject(player.gameObject);
         }
+
+        public void Clear()
+        {
+            Destroy(player.gameObject);
+        }
     }
 }

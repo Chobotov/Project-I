@@ -1,4 +1,8 @@
-﻿using ProjectI.Game.Audio;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using ProjectI.Game.Audio;
+using ProjectI.Utills;
+using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
@@ -14,7 +18,11 @@ namespace ProjectI.Game.Player
         [SerializeField] private CustomGravityComponent gravityComponent;
         [Space]
         [SerializeField] private LayerMask groundLayerMask;
+        [Header("Stats")]
+        [SerializeField] private int health = 100;
         [SerializeField] private bool isGround;
+
+        private readonly Subject<Null> onPlayerDie = new();
 
         private PlayerConfig config;
         private Controls.Controls controls;
@@ -29,8 +37,12 @@ namespace ProjectI.Game.Player
         private float moveInput;
         private int jumpCount;
 
+        public int Health => health;
+
         private MoveSettings MoveSettings => config.MoveSettings;
         private bool CanJump => isGround || jumpCount < MoveSettings.DefaultJumpCount;
+
+        public IObservable<Null> OnPlayerDie => onPlayerDie;
 
         [Inject]
         public void Inject(IAudioService audioService, PlayerConfig config)
@@ -86,8 +98,14 @@ namespace ProjectI.Game.Player
 
                 animator.SetTrigger(JumpAnimationKey);
                 audioService.PlaySfx(AudioKeys.SfxPlayerJump);
-                moveble.Jump(force);
+
+                Jump(force);
             }
+        }
+
+        private void Jump(float force)
+        {
+            moveble.Jump(force);
         }
 
         private void CheckGround()
@@ -114,15 +132,19 @@ namespace ProjectI.Game.Player
             moveble.Move(moveInput, speed);
         }
 
-        private int health;
-        public int Health => health;
         public void SetDamage(int damage)
         {
+            audioService.PlaySfx(AudioKeys.SfxPlayerGetDamage);
+
+            Jump(force: 5f);
+
             health = health -= damage;
 
             if (health <= 0)
             {
                 health = 0;
+
+                onPlayerDie.OnNext(null);
             }
         }
     }

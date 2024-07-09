@@ -9,11 +9,15 @@ namespace ProjectI.Game.Audio
 
         internal void PlayMusic(AudioClip clip)
         {
+            musicSource.Stop();
             musicSource.PlayOneShot(clip);
         }
 
         internal void PlaySfx(AudioClip clip)
         {
+            if (sfxSource.isPlaying) return;
+
+            sfxSource.Stop();
             sfxSource.PlayOneShot(clip);
         }
     }

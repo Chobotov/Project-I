@@ -9,7 +9,7 @@ namespace ProjectI.Game.Player
         private const int HitsCount = 2; 
         private readonly RaycastHit[] hits = new RaycastHit[HitsCount]; 
 
-        private readonly float radius = 3f;
+        private readonly float radius = 1.5f;
 
         private readonly Transform transform;
         private readonly Animator animator;
@@ -48,11 +48,11 @@ namespace ProjectI.Game.Player
 
                     Debug.Log($"Perform Attack : Try Perform Attack To {hit.transform.name}");
 
-                    var parent = hit.transform.parent.parent;
+                    var enemy = hit.transform;
 
-                    if (parent.TryGetComponent<IDamageble>(out var damageble))
+                    if (enemy.TryGetComponent<IDamageble>(out var damageble))
                     {
-                        damageble.SetDamage(100);
+                        damageble.SetDamage(damageble.Health);
 
                         Debug.Log($"Perform Attack : Attack To {hit.transform.name}");
                     }

@@ -2182,10 +2182,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 698592658452214460, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 698592658452214460, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1474829663900364161, guid: 589799e3ae830654eb22cfa7cb08ef35,
         type: 3}
       propertyPath: m_Name
       value: EnemySpawnPoint (Crab)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741294356385694145, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741294356385694145, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8053794140599379097, guid: 589799e3ae830654eb22cfa7cb08ef35,
         type: 3}
@@ -2236,7 +2256,7 @@ PrefabInstance:
     - target: {fileID: 144597464940052942, guid: 5d96c882ac099c94ea7a1cb9e62e7fe8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3623223559255368234, guid: 5d96c882ac099c94ea7a1cb9e62e7fe8,
         type: 3}
@@ -2326,7 +2346,7 @@ PrefabInstance:
     - target: {fileID: 5266403637658383037, guid: 5d96c882ac099c94ea7a1cb9e62e7fe8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2427,10 +2447,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 698592658452214460, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 698592658452214460, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1474829663900364161, guid: 589799e3ae830654eb22cfa7cb08ef35,
         type: 3}
       propertyPath: m_Name
       value: EnemySpawnPoint (Crab)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741294356385694145, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741294356385694145, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8053794140599379097, guid: 589799e3ae830654eb22cfa7cb08ef35,
         type: 3}
@@ -2470,7 +2510,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5581265648147038, guid: 589799e3ae830654eb22cfa7cb08ef35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 44.62
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 5581265648147038, guid: 589799e3ae830654eb22cfa7cb08ef35, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2508,10 +2548,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 698592658452214460, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 698592658452214460, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1474829663900364161, guid: 589799e3ae830654eb22cfa7cb08ef35,
         type: 3}
       propertyPath: m_Name
       value: EnemySpawnPoint (Crab)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741294356385694145, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741294356385694145, guid: 589799e3ae830654eb22cfa7cb08ef35,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8053794140599379097, guid: 589799e3ae830654eb22cfa7cb08ef35,
         type: 3}

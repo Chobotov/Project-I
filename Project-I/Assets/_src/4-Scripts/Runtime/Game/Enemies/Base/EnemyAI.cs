@@ -1,38 +1,41 @@
-using DG.Tweening;
+using System;
 using ProjectI.Configs.Enemy;
+using ProjectI.Game.Levels;
 using ProjectI.Game.Player;
+using UniRx;
 using UnityEngine;
 
 namespace ProjectI.Game.Enemies
 {
     public class EnemyAI : MonoBehaviour, IDamageble
     {
-        [SerializeField] private Transform render;
         [SerializeField] private EnemyType type;
+        [SerializeField] private Transform render;
+        [SerializeField] private Collider collisionCollider;
 
-        protected AttackComponent attackComponent;
+        private readonly Subject<EnemyAI> onDie = new();
+
         protected IMoveble moveble;
-        protected Rigidbody rigidbody;
 
         protected EnemyData data;
 
-        protected int health;
+        private int health;
 
+        public int Health => health;
         public EnemyType Type => type;
         public Transform Render => render;
 
-        protected virtual void Awake()
-        {
-            rigidbody = GetComponent<Rigidbody>();
-        }
+        public IObservable<EnemyAI> OnDie => onDie;
 
-        public virtual void Init(EnemyData data)
+        public virtual void Init(EnemyData data, EnemySpawnPoint point)
         {
             this.data = data;
-            this.type = data.Type;
-        }
 
-        public int Health => health;
+            type = data.Type;
+            health = data.Health;
+
+            moveble = new EnemyMove(transform, point.MovePositions);
+        }
 
         public void SetDamage(int damage)
         {
@@ -48,16 +51,26 @@ namespace ProjectI.Game.Enemies
 
         private void Die()
         {
-            var endPos = transform.position + Vector3.back * 3;
-            var jumpPower = 3f;
-            var jumpCount = 1;
-            var duration = .5f;
- 
-            DOTween.Sequence()
-                .AppendCallback(() => transform.DOScale(Vector3.zero, duration))
-                .AppendCallback(() => transform.DORotate(Vector3.one * 180f, duration, RotateMode.FastBeyond360).SetLoops(-1))
-                .Append(transform.DOJump(endPos, jumpPower, jumpCount, duration))
-                .OnComplete(() => Destroy(gameObject));
+            onDie.OnNext(this);
+
+            collisionCollider.enabled = false;
+
+            moveble.Jump(
+                jumpForce: 3f,
+                onFinish: () => Destroy(gameObject));
+        }
+
+        private void Update()
+        {
+            moveble?.Move(data.Speed);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.TryGetComponent<IDamageble>(out var damageble))
+            {
+                damageble.SetDamage(damageble.Health);
+            }
         }
     }
 }

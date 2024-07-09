@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 1128999820507950022}
   - component: {fileID: 6033995159711611456}
   - component: {fileID: 31246094274370808}
-  - component: {fileID: 478610729052924930}
   m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
@@ -223,29 +222,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &478610729052924930
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4454411968337839833}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6052531585332974219
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,6 +233,7 @@ GameObject:
   - component: {fileID: 486071064517704969}
   - component: {fileID: 6219390680579424005}
   - component: {fileID: 343973331117181763}
+  - component: {fileID: 1368229666608934158}
   - component: {fileID: 8691013263330071985}
   - component: {fileID: 5897145352650663662}
   m_Layer: 3
@@ -328,8 +305,31 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
+  m_Constraints: 120
   m_CollisionDetection: 1
+--- !u!136 &1368229666608934158
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052531585332974219}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8691013263330071985
 MonoBehaviour:
   m_ObjectHideFlags: 0
