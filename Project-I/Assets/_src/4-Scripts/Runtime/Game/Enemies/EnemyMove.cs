@@ -1,5 +1,3 @@
-using System;
-using DG.Tweening;
 using ProjectI.Game.Player;
 using UnityEngine;
 
@@ -23,9 +21,9 @@ namespace ProjectI.Game.Enemies
             currentTransform = movePositions[indexTransform];
         }
 
-        public void Move(float speed)
+        public void Move(float input)
         {
-            if (currentTransform)
+            /*if (currentTransform)
             {
                 enemyTransform.position = Vector3.MoveTowards(
                     enemyTransform.position, 
@@ -36,7 +34,7 @@ namespace ProjectI.Game.Enemies
                 {
                     SwitchPosition();
                 }
-            }
+            }*/
         }
 
         private void SwitchPosition()
@@ -53,9 +51,9 @@ namespace ProjectI.Game.Enemies
             currentTransform = movePositions[indexTransform];
         }
 
-        public void Jump(float jumpForce, Action? onFinish = null)
+        public void Jump()
         {
-            var endPos = enemyTransform.position + Vector3.back * 3;
+            /*var endPos = enemyTransform.position + Vector3.back * 3;
             var jumpCount = 1;
             var duration = .5f;
  
@@ -63,7 +61,7 @@ namespace ProjectI.Game.Enemies
                 .AppendCallback(() => enemyTransform.DOScale(Vector3.zero, duration))
                 .AppendCallback(() => enemyTransform.DORotate(Vector3.one * 180f, duration, RotateMode.FastBeyond360).SetLoops(-1))
                 .Append(enemyTransform.DOJump(endPos, jumpForce, jumpCount, duration))
-                .OnComplete(() => onFinish?.Invoke());
+                .OnComplete(() => onFinish?.Invoke());*/
         }
 
         public void Move(float moveInput, float speed)

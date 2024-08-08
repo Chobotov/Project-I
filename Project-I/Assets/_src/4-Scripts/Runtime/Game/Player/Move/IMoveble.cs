@@ -1,12 +1,9 @@
-﻿using System;
-
-namespace ProjectI.Game.Player
+﻿namespace ProjectI.Game.Player
 {
     public interface IMoveble
     {
-        void Move(float moveInput, float speed);
-        void Move(float speed);
+        void Move(float input);
 
-        void Jump(float jumpForce, Action? onFinish = null);
+        void Jump();
     }
 }

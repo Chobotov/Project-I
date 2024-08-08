@@ -37,9 +37,24 @@ namespace ProjectI.Game
             CreateEnemies();
             SetCameraFollow(playerFactory.Player.transform);
 
-            playerFactory.Player.OnPlayerDie
+            /*playerFactory.Player.OnPlayerDie
                 .Subscribe(OnPlayerDie)
-                .AddTo(playerFactory.Player);
+                .AddTo(playerFactory.Player);*/
+        }
+
+        private void CreateEnemies()
+        {
+            var levelPoints = levelFactory.LevelField.EnemiesPoints;
+
+            foreach (var point in levelPoints)
+            {
+                enemyFactory.SpawnEnemy(point.Type, point);
+            }
+        }
+
+        private void SetCameraFollow(Transform follow)
+        {
+            camera.Follow = follow;
         }
 
         private async void Restart()
@@ -57,9 +72,9 @@ namespace ProjectI.Game
             CreateEnemies();
             SetCameraFollow(playerFactory.Player.transform);
 
-            playerFactory.Player.OnPlayerDie
+            /*playerFactory.Player.OnPlayerDie
                 .Subscribe(OnPlayerDie)
-                .AddTo(this);
+                .AddTo(this);*/
         }
 
         private void OnPlayerDie(Null obj)
@@ -70,21 +85,6 @@ namespace ProjectI.Game
         public void RestartPlayer()
         {
             Restart();
-        }
-
-        private void CreateEnemies()
-        {
-            var levelPoints = levelFactory.LevelField.EnemiesPoints;
-
-            foreach (var point in levelPoints)
-            {
-                enemyFactory.SpawnEnemy(point.Type, point);
-            }
-        }
-
-        private void SetCameraFollow(Transform follow)
-        {
-            camera.Follow = follow;
         }
     }
 }
