@@ -6,9 +6,7 @@ namespace ProjectI.Game.Player
     public class PlayerConfig : ScriptableObject
     {
         [SerializeField] private MoveSettings moveSettings;
-        [SerializeField] private int health;
 
         public MoveSettings MoveSettings => moveSettings;
-        public int Health => health;
     }
 }

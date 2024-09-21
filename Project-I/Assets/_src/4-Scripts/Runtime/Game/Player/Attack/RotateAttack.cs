@@ -50,12 +50,12 @@ namespace ProjectI.Game.Player
 
                     var enemy = hit.transform;
 
-                    /*if (enemy.TryGetComponent<IDamageble>(out var damageble))
+                    if (enemy.TryGetComponent<IDamageble>(out var damageble))
                     {
                         damageble.SetDamage(damageble.Health);
 
                         Debug.Log($"Perform Attack : Attack To {hit.transform.name}");
-                    }*/
+                    }
                 }
             }
         }

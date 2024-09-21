@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace ProjectI.Game.Enemies
 {
-    public class EnemyAI : MonoBehaviour
+    public class EnemyAI : MonoBehaviour, IDamageble
     {
         [SerializeField] private EnemyType type;
         [SerializeField] private Transform render;
@@ -19,6 +19,9 @@ namespace ProjectI.Game.Enemies
 
         protected EnemyData data;
 
+        private int health;
+
+        public int Health => health;
         public EnemyType Type => type;
         public Transform Render => render;
 
@@ -29,18 +32,32 @@ namespace ProjectI.Game.Enemies
             this.data = data;
 
             type = data.Type;
+            health = data.Health;
+
             moveble = new EnemyMove(transform, point.MovePositions);
         }
 
-        public void Die()
+        public void SetDamage(int damage)
+        {
+            health -= damage;
+
+            if (health <= 0)
+            {
+                health = 0;
+
+                Die();
+            }
+        }
+
+        private void Die()
         {
             onDie.OnNext(this);
 
             collisionCollider.enabled = false;
 
-            /*moveble.Jump(
+            moveble.Jump(
                 jumpForce: 3f,
-                onFinish: () => Destroy(gameObject));*/
+                onFinish: () => Destroy(gameObject));
         }
 
         private void Update()
@@ -50,10 +67,10 @@ namespace ProjectI.Game.Enemies
 
         private void OnCollisionEnter(Collision collision)
         {
-            /*if (collision.gameObject.TryGetComponent<IDamageble>(out var damageble))
+            if (collision.gameObject.TryGetComponent<IDamageble>(out var damageble))
             {
                 damageble.SetDamage(damageble.Health);
-            }*/
+            }
         }
     }
 }
