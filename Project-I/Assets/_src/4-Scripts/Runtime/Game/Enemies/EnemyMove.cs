@@ -32,6 +32,8 @@ namespace ProjectI.Game.Enemies
                     currentTransform.position, 
                     speed * Time.deltaTime);
 
+                enemyTransform.LookAt(currentTransform);
+
                 if (Vector3.Distance(enemyTransform.position, currentTransform.position) < 0.001f)
                 {
                     SwitchPosition();
