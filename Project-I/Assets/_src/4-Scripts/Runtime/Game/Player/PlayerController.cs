@@ -1,5 +1,4 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using ProjectI.Game.Audio;
 using ProjectI.Utills;
 using UniRx;
@@ -19,7 +18,6 @@ namespace ProjectI.Game.Player
         [Space]
         [SerializeField] private LayerMask groundLayerMask;
         [Header("Stats")]
-        [SerializeField] private int health = 100;
         [SerializeField] private bool isGround;
 
         private readonly Subject<Null> onPlayerDie = new();
@@ -37,6 +35,8 @@ namespace ProjectI.Game.Player
         private float moveInput;
         private int jumpCount;
 
+        private int health;
+        
         public int Health => health;
 
         private MoveSettings MoveSettings => config.MoveSettings;
@@ -51,6 +51,7 @@ namespace ProjectI.Game.Player
             this.config = config;
 
             speed = MoveSettings.DefaultMoveSpeed;
+            health = config.Health;
         }
 
         private void Awake()
@@ -78,6 +79,25 @@ namespace ProjectI.Game.Player
             controls.Disable();
         }
 
+        private void FixedUpdate()
+        {
+            CheckGround();
+            gravityComponent.HandleGravity(rigidbody);
+
+            if (isGround)
+            {
+                speed = MoveSettings.DefaultMoveSpeed;
+                jumpCount = 0;
+            }
+            else
+            {
+                speed = MoveSettings.FallMoveSpeed;
+            }
+
+            moveInput = controls.Main.Move.ReadValue<float>();
+            moveble.Move(moveInput, speed);
+        }
+
         private void Attack(InputAction.CallbackContext obj)
         {
             if (!isGround) return;
@@ -99,13 +119,8 @@ namespace ProjectI.Game.Player
                 animator.SetTrigger(JumpAnimationKey);
                 audioService.PlaySfx(AudioKeys.SfxPlayerJump);
 
-                Jump(force);
+                moveble.Jump(force);
             }
-        }
-
-        private void Jump(float force)
-        {
-            moveble.Jump(force);
         }
 
         private void CheckGround()
@@ -113,38 +128,29 @@ namespace ProjectI.Game.Player
             isGround = Physics.Raycast(transform.position, Vector3.down, MoveSettings.GroundHeight, groundLayerMask);
         }
 
-        private void FixedUpdate()
-        {
-            CheckGround();
-            gravityComponent.HandleGravity(rigidbody);
-
-            if (isGround)
-            {
-                speed = MoveSettings.DefaultMoveSpeed;
-                jumpCount = 0;
-            }
-            else
-            {
-                speed = MoveSettings.FallMoveSpeed;
-            }
-
-            moveInput = controls.Main.Move.ReadValue<float>();
-            moveble.Move(moveInput, speed);
-        }
-
         public void SetDamage(int damage)
         {
             audioService.PlaySfx(AudioKeys.SfxPlayerGetDamage);
 
-            Jump(force: 5f);
+            moveble.Jump(jumpForce: 5f);
 
-            health = health -= damage;
+            health -= damage;
 
             if (health <= 0)
             {
                 health = 0;
 
                 onPlayerDie.OnNext(null);
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.collider.CompareTag("Enemy"))
+            {
+                var damagable = collision.gameObject.GetComponentInParent<IDamageble>();
+
+                damagable?.SetDamage(damagable.Health);
             }
         }
     }

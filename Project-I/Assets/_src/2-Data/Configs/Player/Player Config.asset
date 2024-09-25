@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01976862293f44d3941c1323435d9096, type: 3}
   m_Name: Player Config
   m_EditorClassIdentifier: 
+  health: 100
   moveSettings:
     defaultMoveSpeed: 5
     fallMoveSpeed: 5

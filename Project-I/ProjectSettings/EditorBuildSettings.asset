@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/_src/5-Scenes/EntryPoint/EntryPoint.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/_src/5-Scenes/Levels/Test/Game.unity
-    guid: 787b361dbc6840a4c87cda2c14f58f00
-  - enabled: 1
-    path: Assets/_src/5-Scenes/LevelsWorld/LevelsWorld.unity
-    guid: 226e12ba5beb1194e8a79e311b7bcc27
+    path: Assets/_src/5-Scenes/Game.unity
+    guid: bdaac01aea1e95240a92a7f398f82558
   m_configObjects: {}
