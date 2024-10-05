@@ -151,6 +151,8 @@ namespace ProjectI.Game.Player
                 var damagable = collision.gameObject.GetComponentInParent<IDamageble>();
 
                 damagable?.SetDamage(damagable.Health);
+                
+                moveble.Jump(jumpForce: 5f);
             }
         }
     }

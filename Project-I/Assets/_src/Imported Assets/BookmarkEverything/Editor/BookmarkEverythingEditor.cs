@@ -620,7 +620,9 @@ namespace BookmarkEverything
         /// <returns></returns>
         private GUIContent RetrieveGUIContent(string name, string iconName = "", string tooltip = "", bool useIconResolver = false)
         {
-            if (iconName != null || iconName != "")
+            return new GUIContent(name);
+            
+            /*if (iconName != null || iconName != "")
             {
                 GUIContent c = new GUIContent(EditorGUIUtility.IconContent(iconName));
                 c.text = name;
@@ -630,7 +632,7 @@ namespace BookmarkEverything
             else
             {
                 return new GUIContent(name);
-            }
+            }*/
         }
 #endregion
 
