@@ -4,7 +4,7 @@ using VContainer.Unity;
 
 namespace ProjectI.Game.Levels
 {
-    public class LevelFactory : MonoBehaviour, ITickable
+    public class LevelFactory : MonoBehaviour
     {
         private IObjectResolver resolver;
         private ILevelService levelService;
@@ -25,16 +25,12 @@ namespace ProjectI.Game.Levels
             var field = levelService.GetLevelField();
             levelField = Instantiate(field, transform);
 
-            resolver.InjectGameObject(field.gameObject);
+            resolver.InjectGameObject(levelField.gameObject);
         }
 
         public void ClearField()
         {
             Destroy(levelField.gameObject);
-        }
-
-        public void Tick()
-        {
         }
     }
 }

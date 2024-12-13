@@ -20,6 +20,11 @@ namespace ProjectI.Game.Audio
             controller.PlayMusic(data.Clip);
         }
 
+        public void StopMusic()
+        {
+            controller.StopMusic();
+        }
+
         public void PlaySfx(AudioKeys key)
         {
             var data = config.GetAudio(key);

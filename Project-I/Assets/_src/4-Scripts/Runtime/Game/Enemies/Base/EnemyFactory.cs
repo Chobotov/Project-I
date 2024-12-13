@@ -47,7 +47,7 @@ namespace ProjectI.Game.Enemies
 
         public void Clear()
         {
-            for (var i = 0; i < enemies.Count; i++)
+            for (var i = enemies.Count - 1; i >= 0; i--)
             {
                 var enemy = enemies[i];
 

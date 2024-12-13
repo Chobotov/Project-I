@@ -1,9 +1,12 @@
-﻿namespace ProjectI.Game.Levels
+﻿using UniRx;
+
+namespace ProjectI.Game.Levels
 {
     public interface ILevelService
     {
-        int CurrentLevel { get; }
+        IReadOnlyReactiveProperty<int> CurrentLevel { get; }
 
+        void CompleteLevel();
         LevelController GetLevelField();
     }
 }

@@ -16,7 +16,7 @@ namespace ProjectI.Game.Player
 
         public void Move(float moveInput, float speed)
         {
-            rigidbody.velocity = new Vector2(moveInput * speed, rigidbody.velocity.y);
+            rigidbody.linearVelocity = new Vector2(moveInput * speed, rigidbody.linearVelocity.y);
 
             var rotate = moveInput > 0
                 ? 1f

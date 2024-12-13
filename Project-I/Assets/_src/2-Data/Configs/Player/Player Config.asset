@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   moveSettings:
-    defaultMoveSpeed: 5
-    fallMoveSpeed: 5
+    defaultMoveSpeed: 8
+    fallMoveSpeed: 10
     defaultJumpCount: 1
     jumpForce: 5
     groundHeight: 2

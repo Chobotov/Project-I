@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System;
+using Cinemachine;
 using Cysharp.Threading.Tasks;
 using ProjectI.Game.Audio;
 using ProjectI.Game.Enemies;
@@ -16,30 +17,56 @@ namespace ProjectI.Game
         [SerializeField] private CinemachineVirtualCamera camera;
         [Header("Factories")]
         [SerializeField] private LevelFactory levelFactory;
+        [SerializeField] private CoinFactory coinFactory;
         [SerializeField] private PlayerFactory playerFactory;
         [SerializeField] private EnemyFactory enemyFactory;
 
         private IAudioService audioService;
+        private ILevelService levelService;
 
         [Inject]
-        public void Inject(IAudioService service)
+        public void Inject(IAudioService audioService, ILevelService levelService)
         {
-            audioService = service;
+            this.audioService = audioService;
+            this.levelService = levelService;
 
-            audioService.PlayMusic(AudioKeys.MusicTestLevel);
+            levelService.CurrentLevel
+                .Skip(1)
+                .Subscribe(_ => OnLevelComplete())
+                .AddTo(this);
         }
 
         private void Start()
         {
+            CreateLevel();
+        }
+
+        private void CreateLevel()
+        {
             levelFactory.CreateLevelField();
             playerFactory.CreatePlayer(levelFactory.LevelField.StartPoint.position);
 
+            CreateCollectables();
             CreateEnemies();
             SetCameraFollow(playerFactory.Player.transform);
+
+            audioService.PlayMusic(AudioKeys.MusicTestLevel);
 
             playerFactory.Player.OnPlayerDie
                 .Subscribe(OnPlayerDie)
                 .AddTo(playerFactory.Player);
+        }
+
+        private void OnLevelComplete()
+        {
+            playerFactory.Clear();
+            enemyFactory.Clear();
+            coinFactory.Clear();
+            levelFactory.ClearField();
+
+            audioService.StopMusic();
+
+            CreateLevel();
         }
 
         private async void Restart()
@@ -70,6 +97,16 @@ namespace ProjectI.Game
         public void RestartPlayer()
         {
             Restart();
+        }
+
+        private void CreateCollectables()
+        {
+            var points = levelFactory.LevelField.CoinPoints;
+
+            foreach (var point in points)
+            {
+                coinFactory.SpawnCoin(point);
+            }
         }
 
         private void CreateEnemies()
