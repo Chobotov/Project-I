@@ -16,7 +16,7 @@ namespace ProjectI.Game.Player
 
         public void Move(float moveInput, float speed)
         {
-            rigidbody.linearVelocity = new Vector2(moveInput * speed, rigidbody.linearVelocity.y);
+            rigidbody.linearVelocity = new Vector2(speed, rigidbody.linearVelocity.y);
 
             var rotate = moveInput > 0
                 ? 1f
@@ -31,7 +31,7 @@ namespace ProjectI.Game.Player
 
         public void Jump(float jumpForce, Action? onFinish = null)
         {
-            rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, jumpForce);
         }
 
         public void Move(float speed)

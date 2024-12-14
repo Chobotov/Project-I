@@ -7,6 +7,8 @@ namespace ProjectI.Game.Player
     public class MoveSettings
     {
         [SerializeField] private float defaultMoveSpeed;
+        [SerializeField] private float acceleration = 10f;
+        [SerializeField] private float deceleration = 50f;
         [SerializeField] private float fallMoveSpeed;
         [SerializeField] private float defaultJumpCount;
         [SerializeField] private float jumpForce;
@@ -14,12 +16,16 @@ namespace ProjectI.Game.Player
 
         public float DefaultMoveSpeed => defaultMoveSpeed;
 
-        public float FallMoveSpeed => fallMoveSpeed;
-
         public float DefaultJumpCount => defaultJumpCount;
 
         public float JumpForce => jumpForce;
 
         public float GroundHeight => groundHeight;
+
+        public float FallMoveSpeed => fallMoveSpeed;
+
+        public float Acceleration => acceleration;
+
+        public float Deceleration => deceleration;
     }
 }

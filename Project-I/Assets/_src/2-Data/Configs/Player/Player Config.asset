@@ -15,7 +15,9 @@ MonoBehaviour:
   health: 100
   moveSettings:
     defaultMoveSpeed: 8
-    fallMoveSpeed: 10
+    acceleration: 10
+    deceleration: 40
+    fallMoveSpeed: 6.4
     defaultJumpCount: 1
-    jumpForce: 5
+    jumpForce: 19
     groundHeight: 2

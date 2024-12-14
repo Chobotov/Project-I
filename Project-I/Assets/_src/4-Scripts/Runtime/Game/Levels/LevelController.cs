@@ -16,5 +16,21 @@ namespace ProjectI.Game.Levels
 
         public IReadOnlyCollection<CoinSpawnPoint> CoinPoints => coinPoints;
         public IReadOnlyCollection<EnemySpawnPoint> EnemiesPoints => enemiesPoints;
+
+        [ContextMenu("Find all coins")]
+        private void FindAllCoins()
+        {
+            var coins = transform.GetComponentsInChildren<CoinSpawnPoint>();
+
+            coinPoints = new(coins);
+        }
+
+        [ContextMenu("Find all enemies")]
+        private void FindAllEnemies()
+        {
+            var enemies = transform.GetComponentsInChildren<EnemySpawnPoint>();
+
+            enemiesPoints = new(enemies);
+        }
     }
 }
