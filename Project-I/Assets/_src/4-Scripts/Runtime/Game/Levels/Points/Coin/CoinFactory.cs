@@ -26,6 +26,8 @@ namespace ProjectI.Game.Levels
 
             resolver.InjectGameObject(coin.gameObject);
 
+            coins.Add(coin.gameObject);
+
             return coin;
         }
 

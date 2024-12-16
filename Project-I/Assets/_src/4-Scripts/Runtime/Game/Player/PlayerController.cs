@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using ProjectI.Game.Audio;
 using ProjectI.Utills;
 using UniRx;
@@ -82,14 +83,10 @@ namespace ProjectI.Game.Player
         private void FixedUpdate()
         {
             CheckGround();
-
+            
             if (!isGround)
             {
                 gravityComponent.HandleGravity(rigidbody);
-            }
-            else
-            {
-                jumpCount = 0;
             }
 
             moveInput = controls.Main.Move.ReadValue<float>();
@@ -112,6 +109,12 @@ namespace ProjectI.Game.Player
             moveble.Move(moveInput, currentSpeed);
         }
 
+        private void LateUpdate()
+        {
+            if (isGround) 
+                jumpCount = 0;
+        }
+
         private void Attack(InputAction.CallbackContext obj)
         {
             if (!isGround) return;
@@ -121,22 +124,21 @@ namespace ProjectI.Game.Player
             attackComponent.Execute();
         }
 
-        private void Jump(InputAction.CallbackContext obj)
+        private async void Jump(InputAction.CallbackContext obj)
         {
             if (CanJump)
             {
-                jumpCount++;
-
                 animator.SetTrigger(JumpAnimationKey);
                 audioService.PlaySfx(AudioKeys.SfxPlayerJump);
 
                 moveble.Jump(MoveSettings.JumpForce);
+                jumpCount += 1;
             }
         }
 
         private void CheckGround()
         {
-            isGround = Physics.Raycast(transform.position, Vector3.down, MoveSettings.GroundHeight, groundLayerMask);
+            isGround = Physics.Raycast(transform.position, Vector3.down, MoveSettings.GroundHeight, groundLayerMask.value);
         }
 
         public void SetDamage(int damage)
@@ -163,8 +165,13 @@ namespace ProjectI.Game.Player
 
                 damagable?.SetDamage(damagable.Health);
                 
-                moveble.Jump(jumpForce: 25f);
+                moveble.Jump(jumpForce: 20f);
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            Debug.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - 1 * MoveSettings.GroundHeight, transform.position.z), Color.red);
         }
     }
 }

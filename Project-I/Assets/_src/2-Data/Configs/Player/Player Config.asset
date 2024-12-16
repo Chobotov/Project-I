@@ -18,6 +18,6 @@ MonoBehaviour:
     acceleration: 10
     deceleration: 40
     fallMoveSpeed: 6.4
-    defaultJumpCount: 1
+    defaultJumpCount: 2
     jumpForce: 19
-    groundHeight: 2
+    groundHeight: 1

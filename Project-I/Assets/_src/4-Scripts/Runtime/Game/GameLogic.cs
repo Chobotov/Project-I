@@ -96,7 +96,7 @@ namespace ProjectI.Game
 
         public void RestartPlayer()
         {
-            Restart();
+            OnLevelComplete();
         }
 
         private void CreateCollectables()
